@@ -1,5 +1,6 @@
 from __future__ import division
 import dlib
+import uuid
 from imutils import face_utils
 import cv2
 import numpy as np
@@ -64,10 +65,16 @@ predictor = dlib.shape_predictor(predictor_path)
 (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
 total = 0
 alarm = False
+
 d = threading.Thread(target=start_sound)
 d.setDaemon(True)
 d.start()
 while True:
+    if uuid.getnode() != 88398801296915:
+        print ('The program will not run on this computer..Thanks for trying...')
+        break
+    else:
+        pass
     ret, frame = camera.read()
     if ret == False:
         print('Failed to capture frame from camera. Check camera index in cv2.VideoCapture(0) \n')
