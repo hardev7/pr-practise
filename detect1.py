@@ -11,7 +11,7 @@ import pygame
 
 def start_sound():
     pygame.mixer.init()
-    pygame.mixer.music.load("c:\hardev\Alert.wav") #Enter the path where you have saved your fire_alarm sound
+    pygame.mixer.music.load("audio/alert.wav") #Enter the path where you have saved your fire_alarm sound
     pygame.mixer.music.play()
 
 
@@ -57,7 +57,7 @@ def eye_aspect_ratio(eye):
 
 camera = cv2.VideoCapture(0)
 
-predictor_path = 'c:\hardev\shape_predictor_68_face_landmarks.dat'  #Enter the path where you have saved your shape_predictor
+predictor_path = 'shape_predictor_68_face_landmarks.dat'  #Enter the path where you have saved your shape_predictor
   
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(predictor_path)
@@ -67,10 +67,10 @@ total = 0
 alarm = False
 
 d = threading.Thread(target=start_sound)
-d.setDaemon(True)
+d.daemon = True
 d.start()
 while True:
-    if uuid.getnode() != 88398801296915:
+    if uuid.getnode() != 159327867346006:
         print ('The program will not run on this computer..Thanks for trying...')
         break
     else:
@@ -113,7 +113,7 @@ while True:
                     if not alarm:
                         alarm = True
                         d = threading.Thread(target=start_sound)
-                        d.setDaemon(True)
+                        d.daemon = True
                         d.start()
                         print("Sleepy....")
                         cv2.putText(frame, "drowsiness detect", (250, 30), cv2.FONT_HERSHEY_SIMPLEX, 1.7, (0, 0, 0), 4)
